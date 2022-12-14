@@ -5,7 +5,7 @@ use anchor_spl::token::{
 };
 use anchor_spl::{self};
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+declare_id!("8mD7hwb1rqXnhCLq67RT4KHg1H93hiWekjHjvy7z6Q3U");
 
 #[program]
 pub mod multi_chain_amm {
@@ -42,6 +42,10 @@ pub mod multi_chain_amm {
         Ok(())
     }
 
+    pub fn create_liquidity_token(ctx: Context<CreateLiquidityToken>) -> Result<()> {
+        Ok(())
+    }
+
     pub fn create_liquidity_acc(ctx: Context<CreateLiquidityAcc>) -> Result<()> {
         let liquidity_acc = &mut ctx.accounts.liquidity_acc;
         let token_program = ctx.accounts.token_program.to_account_info();
@@ -66,6 +70,11 @@ pub mod multi_chain_amm {
         liquidity_acc.eth = 0;
         liquidity_acc.sol = 0;
         liquidity_acc.bump = bump;
+        Ok(())
+    }
+
+    pub fn provide_liquidity(ctx: Context<ProvideLiquidity>) -> Result<()> {
+        // Todo
         Ok(())
     }
 }
@@ -101,7 +110,9 @@ pub struct CreateLiquidityToken<'info> {
     pub user: Signer<'info>,
     pub system_program: Program<'info, System>,
     pub eth_token_acc: Account<'info, TokenAccount>,
+    /// CHECK: checked inside the instruct
     pub eth_token_mint: AccountInfo<'info>,
+    /// CHECK: checked inside the instruct
     pub token_program: AccountInfo<'info>,
     pub rent: Sysvar<'info, Rent>,
 }
@@ -120,6 +131,9 @@ pub struct CreateLiquidityAcc<'info> {
     pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,
 }
+
+#[derive(Accounts)]
+pub struct ProvideLiquidity {}
 
 #[account]
 pub struct LiquidityAccount {
