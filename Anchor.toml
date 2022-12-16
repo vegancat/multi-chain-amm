@@ -1,8 +1,8 @@
 [features]
-seeds = true
+seeds = false
 skip-lint = false
 [programs.localnet]
-multi_chain_amm = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+multi_chain_amm = "8mD7hwb1rqXnhCLq67RT4KHg1H93hiWekjHjvy7z6Q3U"
 
 [registry]
 url = "https://api.apr.dev"
